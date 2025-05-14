@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-12">
+    <h2 class="mb-4 text-center">Post News</h2>
+    <form method="POST" action="{{ url_for('post_news') }}" enctype="multipart/form-data">
+      
+      <div class="mb-3">
+        <label>Title</label>
+        <input type="text" name="title" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="5" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label>Source Link</label>
+        <input type="url" name="source_link" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label>Upload Image</label>
+        <input type="file" name="image" accept="image/*" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label>Upload Video</label>
+        <input type="file" name="video" accept="video/*" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-success w-100">Post News</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

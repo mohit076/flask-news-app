@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+  <h2 class="mb-4 text-center">All News Posts</h2>
+
+  <!-- Filter Dropdown -->
+  <form method="get" class="mb-4">
+    <div class="row">
+      <div class="col-md-4 col-sm-8">
+        <select name="status" class="form-select" onchange="this.form.submit()">
+          <option value="">All Posts</option>
+          <option value="verified" {% if request.args.get('status') == 'verified' %}selected{% endif %}>Verified</option>
+          <option value="fake" {% if request.args.get('status') == 'fake' %}selected{% endif %}>Fake</option>
+          <option value="pending" {% if request.args.get('status') == 'pending' %}selected{% endif %}>Unverified</option>
+        </select>
+      </div>
+    </div>
+  </form>
+
+  {% for post in posts %}
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+
+      <h5 class="card-title">
+        {{ post.title }}
+        {% if post.status == 'verified' %}
+          <span class="badge bg-success">Verified</span>
+        {% elif post.status == 'fake' %}
+          <span class="badge bg-danger">Fake</span>
+        {% else %}
+          <span class="badge bg-warning text-dark">Unverified</span>
+        {% endif %}
+      </h5>
+
+      {% if post.image_path %}
+        <img src="{{ url_for('static', filename=post.image_path) }}"
+             class="img-fluid mb-3" style="max-height: 300px;" alt="News Image">
+      {% endif %}
+
+      {% if post.video_path %}
+        <div class="mb-3">
+          <video controls style="width: 100%; max-height: 360px;">
+            <source src="{{ url_for('static', filename=post.video_path) }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      {% endif %}
+
+      <p class="card-text">{{ post.description }}</p>
+
+      {% if post.source_link %}
+        <p>Source: <a href="{{ post.source_link }}" target="_blank">{{ post.source_link }}</a></p>
+      {% endif %}
+
+      <small class="text-muted">
+        Posted by {{ post.username }} on {{ post.timestamp.strftime('%d %b %Y %I:%M %p') }}
+      </small>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}
