@@ -8,13 +8,13 @@ import os
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = '1f5ecf30a4169c7d55e46341544e0756'
 
 # Configure Cloudinary
 cloudinary.config(
     cloud_name='dqodwa97j',
     api_key='735942196894695',
-    api_secret='*********************************'
+    api_secret='xpN-AaCYcjqjWjFUGiAwrEAQqhs'
 )
 
 # PostgreSQL DB Connection
