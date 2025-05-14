@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">Admin Dashboard</h2>
+
+  {% for post in posts %}
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>{{ post.title }}</h5>
+      <p>By: {{ post.username }} | Status: 
+        <span class="badge {% if post.status == 'verified' %}bg-success
+                          {% elif post.status == 'fake' %}bg-danger
+                          {% else %}bg-secondary{% endif %}">
+          {{ post.status }}
+        </span>
+      </p>
+      <p>{{ post.description }}</p>
+
+      <a href="{{ url_for('verify_post', post_id=post.id) }}" class="btn btn-success btn-sm">Verify</a>
+      <a href="{{ url_for('mark_fake_post', post_id=post.id) }}" class="btn btn-danger btn-sm">Mark Fake</a>
+      <a href="{{ url_for('delete_post', post_id=post.id) }}" class="btn btn-outline-danger btn-sm">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
