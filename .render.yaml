@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: flask-news-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: MYSQL_HOST
+        value: your-db-host
+      - key: MYSQL_USER
+        value: your-db-user
+      - key: MYSQL_PASSWORD
+        value: your-db-password
+      - key: MYSQL_DB
+        value: news_platform_db
+      - key: CLOUDINARY_URL
+        value: cloudinary://api_key:api_secret@cloud_name
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        value: your-secret-key
