@@ -36,7 +36,7 @@ def home():
     posts = cur.fetchall()
     cur.close()
     conn.close()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
