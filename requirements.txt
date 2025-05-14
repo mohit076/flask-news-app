@@ -2,7 +2,6 @@ Flask==2.3.2
 Flask-MySQLdb==1.0.1
 Flask-Bcrypt==1.0.1
 Flask-WTF
-os
 psycop2
 psycop2-binary
 cloudinary==1.36.0
